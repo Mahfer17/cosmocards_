@@ -1,0 +1,200 @@
+/* ==========================================================================
+   1. RESET E CONFIGURAÇÕES GERAIS (TEMA ESPACIAL)
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #080914;
+  color: #e2e8f0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* Fundo galáctico com poeira estelar em gradiente */
+  background-image: 
+    radial-gradient(circle at 15% 20%, rgba(168, 85, 247, 0.2) 0%, transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(56, 189, 248, 0.18) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.8) 0%, #080914 100%);
+  background-attachment: fixed;
+}
+
+/* ==========================================================================
+   2. CABEÇALHO (HEADER)
+   ========================================================================== */
+header {
+  text-align: center;
+  padding: 3rem 1rem 1.5rem;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #c084fc 0%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.6rem;
+  text-shadow: 0 0 30px rgba(192, 132, 252, 0.3);
+}
+
+header p {
+  color: #94a3b8;
+  font-size: 1.05rem;
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   3. ÁREA PRINCIPAL E CONTAINER DOS CARDS
+   ========================================================================== */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  width: 100%;
+}
+
+.container-flashcards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 2.5rem;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   4. ESTRUTURA E ANIMAÇÃO 3D DO FLASHCARD
+   ========================================================================== */
+.card {
+  background-color: transparent;
+  height: 380px;
+  perspective: 1000px; /* Efeito de profundidade 3D */
+  cursor: pointer;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-style: preserve-3d;
+}
+
+/* Gira o card ao passar o mouse ou ao adicionar a classe .flipped via JavaScript */
+.card:hover .card-inner,
+.card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+/* Regras comuns para as duas faces do card */
+.card-front, 
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden; /* Oculta o verso quando a face está virada */
+  border-radius: 20px;
+  padding: 1.8rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6),
+              inset 0 0 15px rgba(255, 255, 255, 0.03);
+}
+
+/* --- Frente do Card --- */
+.card-front {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Imagens das afirmações */
+.card-img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  border: 2px solid #a855f7;
+  box-shadow: 0 0 18px rgba(168, 85, 247, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.card:hover .card-img {
+  transform: scale(1.05);
+}
+
+.card-front h3 {
+  color: #38bdf8;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+}
+
+.card-front p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  font-weight: 500;
+  color: #f8fafc;
+}
+
+/* --- Verso do Card --- */
+.card-back {
+  transform: rotateY(180deg);
+  background: rgba(10, 15, 30, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.card-back p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+/* Tags de Mito ou Verdade */
+.tag {
+  display: inline-block;
+  font-weight: 800;
+  font-size: 1.1rem;
+  padding: 0.4rem 1.2rem;
+  border-radius: 30px;
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.mito .tag {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.6);
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.2);
+}
+
+.verdade .tag {
+  background-color: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.6);
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.2);
+}
+
+/* ==========================================================================
+   5. RODAPÉ (FOOTER)
+   ========================================================================== */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: #64748b;
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(8, 9, 20, 0.8);
+}
